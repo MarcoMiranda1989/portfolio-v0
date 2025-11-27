@@ -1,0 +1,55 @@
+
+
+<header class="w-full">
+    <div class="flex justify-center items-center h-[10vh] w-full"> 
+        <div class="flex justify-center items-center w-full max-w-7xl">
+           
+            <button 
+                id="menu-toggle" 
+                aria-label="Toggle Menu"
+                class="block md:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+            >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+
+            <nav 
+                id="mobile-menu" 
+                class="
+                    hidden absolute top-[10vh] left-0 right-0 z-40 
+                    bg-gray-800 shadow-md p-4 flex-col space-y-3
+                    md:flex md:relative md:top-auto md:shadow-none md:p-0 
+                    md:flex-row md:space-x-10 md:space-y-0 md:bg-transparent
+                "
+            >
+                <a href="#projects" class="text-white no-underline hover:text-indigo-400 transition">Proyectos</a>
+                <a href="#experience" class="text-white no-underline hover:text-indigo-400 transition">Experiencia</a>
+                <a href="#aboutMe" class="text-white no-underline hover:text-indigo-400 transition">Acerca de mi</a>
+                <a href="#contact" class="text-white no-underline hover:text-indigo-400 transition">Contacto</a>
+            </nav>
+        </div> 
+    </div> 
+</header>
+<script is:inline>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            // Alterna entre oculto (hidden) y visible (flex)
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Cierra el menú al hacer clic en un enlace (importante para la UX móvil)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) { // Usamos 768px porque es el breakpoint 'md' de Tailwind
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                }
+            });
+        });
+    }
+</script>
